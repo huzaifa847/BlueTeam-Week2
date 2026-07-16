@@ -1,0 +1,30 @@
+title: Suspicious PowerShell Encoded Command
+
+id: e9d5c11d-1111-4444-8888-aaaaaaaaaaaa
+
+status: experimental
+
+description: Detects PowerShell launched with an encoded command.
+
+author: Huzaifa
+
+date: 2026-07-16
+
+logsource:
+  product: windows
+  category: process_creation
+
+detection:
+  selection:
+    Image|endswith: '\powershell.exe'
+    CommandLine|contains: '-enc'
+  condition: selection
+
+falsepositives:
+  - Legitimate administration scripts
+
+level: high
+
+tags:
+  - attack.execution
+  - attack.t1059.001

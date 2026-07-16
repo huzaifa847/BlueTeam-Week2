@@ -1,0 +1,29 @@
+title: Suspicious Regsvr32 Execution
+
+id: 7b9e8f42-4a12-4f3e-9c22-222222222222
+
+status: experimental
+
+description: Detects suspicious execution of regsvr32.exe which may be used for proxy execution.
+
+author: Huzaifa
+
+date: 2026-07-16
+
+logsource:
+  product: windows
+  category: process_creation
+
+detection:
+  selection:
+    CommandLine|contains:
+      - '/i:'
+      - '.dll'
+
+  condition: selection
+
+falsepositives:
+  - Legitimate software registration
+
+level: medium
+
